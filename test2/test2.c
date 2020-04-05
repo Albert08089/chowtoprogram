@@ -82,7 +82,7 @@ int enterGrade()
     int num;
     printf("Enter a score : ");
     scanf("%d", &num);
-    
+
     while (num <= 0 || num >= 100)
     {
         // flush input buffer
@@ -93,7 +93,7 @@ int enterGrade()
     return num;
 }
 
-//average grade function 
+//average grade function
 float averageGrade(int Grade_1, int Grade_2, int Grade_3)
 {
     float Average;
@@ -120,7 +120,7 @@ char letterGrade(float avg)
     return letter;
 }
 
-//highest grade function 
+//highest grade function
 float highestGrade(int Grade_1, int Grade_2, int Grade_3)
 {
     float largest;
