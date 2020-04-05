@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <time.h>
+// define max and min for rand() to work properly
 #define max 100
 #define min 50
 
@@ -75,6 +76,7 @@ int main(void)
     return 0;
 }
 
+//enter grade function
 int enterGrade()
 {
     int num;
@@ -91,6 +93,7 @@ int enterGrade()
     return num;
 }
 
+//average grade function 
 float averageGrade(int Grade_1, int Grade_2, int Grade_3)
 {
     float Average;
@@ -100,6 +103,7 @@ float averageGrade(int Grade_1, int Grade_2, int Grade_3)
     return Average;
 }
 
+//letter grade function
 char letterGrade(float avg)
 {
     char letter = '-';
@@ -116,20 +120,24 @@ char letterGrade(float avg)
     return letter;
 }
 
+//highest grade function 
 float highestGrade(int Grade_1, int Grade_2, int Grade_3)
 {
     float largest;
 
+    //this code is the same as if/else if statement's
     largest = Grade_1 > Grade_2 ? (Grade_1 > Grade_3 ? Grade_1 : Grade_3)
                                 : (Grade_2 > Grade_3 ? Grade_2 : Grade_3);
 
     return largest;
 }
 
+//lowest grade function
 float lowestGrade(int Grade_1, int Grade_2, int Grade_3)
 {
     float smallest;
 
+    //this code is the same as if/else if statement's
     smallest = Grade_1 < Grade_2 ? (Grade_1 < Grade_3 ? Grade_1 : Grade_3)
                                  : (Grade_2 < Grade_3 ? Grade_2 : Grade_3);
 
