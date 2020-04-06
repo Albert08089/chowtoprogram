@@ -2,4 +2,4 @@
 
 ![](img/cprogram.jpg)
 
-- this is the collection of my class files
+- this is the collection of my class files.
