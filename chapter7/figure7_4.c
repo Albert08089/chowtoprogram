@@ -12,7 +12,7 @@ int main(void)
 
     printf("The address of a is %p"
            "\nThe value of aPtr is %p",
-           &a, aPtr, );
+           &a, aPtr);
 
     printf("\n\nThe value of a is %d"
            "\nThe value of *aPtr is %d",
