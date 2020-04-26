@@ -3,155 +3,113 @@
 
 int main()
 {
-    char issue1[] = "Issue #1", issue2[] = "Issue #2", issue3[] = "Issue #3", issue4[] = "Issue #4", issue5[] = "Issue #5";
-
-    //For indentation
-    int issueLengths[5], longest = 0;
-    issueLengths[0] = strlen(issue1);
-    issueLengths[1] = strlen(issue2);
-    issueLengths[2] = strlen(issue3);
-    issueLengths[3] = strlen(issue4);
-    issueLengths[4] = strlen(issue5);
-    for (int i = 0; i < 5; i++)
+    //j is count of columns
+    //rating is rating of cause between 1-10
+    //ans is continue survey or not
+    //survey is 2d array that is contain cause and rating
+    //char cause is temporary for storing cause in one time
+    int rating, i, j, ans, sum[100005], k;
+    float avg[10];
+    int survey[100][100];
+    char cause[1000][1000];
+    j = 1;
+    printf("Enter the five cause and corresponding rating: \n");
+    // in first time user should give the cause and rating after one time
+    //cause store in memory and user give only rating
+    for (i = 1; i <= 5; i++)
     {
-        if (longest < issueLengths[i])
-            longest = issueLengths[i];
+        fflush(stdin);
+        //take shortcut form of cause i.e. political cause= p.c
+        printf("Cause : ");
+        scanf("%[^\t\n]s", cause[i]);
+        printf("Rating : ");
+        scanf("%d", &rating);
+        survey[i][1] = rating;
     }
-    longest += 2;
 
-    int ratings[5][10], highest = 0, lowest = 101;
-    char ch, hIssue[100], sIssue[100];
-    float avg, sum;
-    do
+    //if ans ==1 that means perform another survey
+    printf("If you do another survey then Press : 1 otherwise Press : 0\n");
+    scanf("%d", &ans);
+    while (ans == 1)
     {
-        //Taking user input
-        for (int i = 0; i < 10; i++)
+        j++;
+        for (i = 1; i <= 5; i++)
         {
-            printf("How would you rate the importance of the following issues?(1-10)\n");
-            printf("%s: ", issue1);
-            scanf("%d", &ratings[0][i]);
-            printf("%s: ", issue2);
-            scanf("%d", &ratings[1][i]);
-            printf("%s: ", issue3);
-            scanf("%d", &ratings[2][i]);
-            printf("%s: ", issue4);
-            scanf("%d", &ratings[3][i]);
-            printf("%s: ", issue5);
-            scanf("%d", &ratings[4][i]);
+            printf("Cause : ");
+            printf("%s", cause[i]);
+            printf("\nRating : ");
+            scanf("%d", &rating);
+            survey[i][j] = rating;
         }
+        printf("\nIf you do another survey then press:1 otherwise:0\n");
+        scanf("%d", &ans);
+    }
+    //calculating average for each cause and sum of all survey corresponding cause
+    for (i = 1; i <= 5; i++)
+    {
+        sum[i] = 0;
+        for (k = 1; k <= j; k++)
+        {
+            sum[i] = sum[i] + survey[i][k];
+        }
+        avg[i] = (float)sum[i] / j;
+    }
 
-        for (int i = 0; i < longest; i++)
-            printf(" ");
-        printf("#1\t#2\t#3\t#4\t#5\t#6\t#7\t#8\t#9\t#10\tAVG\n"); //First line
-        printf("%s", issue1);
-        for (int i = strlen(issue1); i < longest; i++) //Indenting
-            printf(" ");
-        sum = 0;
-        for (int i = 0; i < 10; i++) //Outputting results
+    //(a) A tabular report
+    printf("Cause\t");
+    for (i = 1; i <= j; i++)
+    {
+        printf("\tc%d", i);
+    }
+    //(b) show average in right side of table
+    printf("\t Average\n");
+    for (i = 1; i <= 5; i++)
+    {
+        printf("%s", cause[i]);
+        printf("\t");
+        for (k = 1; k <= j; k++)
         {
-            sum += ratings[0][i];
-            printf("%d\t", ratings[0][i]);
+            printf("\t%d", survey[i][k]);
         }
-        avg = sum / 10;
-        printf("%f\n", avg);
-        if (highest < sum) //Checking if highest
+        //(b) show average value in right side of table
+        printf("\t %f ", avg[i]);
+        printf("\n");
+    }
+
+    //(c)calculating highest point cause
+    int maxp = sum[1];
+    int pos_max = 1, pos_min = 1;
+    int minp = sum[1];
+    for (i = 1; i <= 5; i++)
+    {
+        if (maxp < sum[i])
         {
-            highest = sum;
-            strcpy(hIssue, issue1);
+            pos_max = i;
+            maxp = sum[i];
         }
-        if (lowest > sum) //Checking if lowest
+    }
+
+    //(c) print highest point clause
+    printf("\nmax point cause : %s", cause[pos_max]);
+    printf("\n");
+    printf("point total : %d", maxp);
+    printf("\n");
+
+    //(d) calculating lowest point clause
+
+    for (i = 1; i <= 5; i++)
+    {
+        if (minp > sum[i])
         {
-            lowest = sum;
-            strcpy(sIssue, issue1);
+            pos_min = i;
+            minp = sum[i];
         }
-        printf("%s", issue2);
-        for (int i = strlen(issue2); i < longest; i++)
-            printf(" ");
-        sum = 0;
-        for (int i = 0; i < 10; i++)
-        {
-            sum += ratings[1][i];
-            printf("%d\t", ratings[1][i]);
-        }
-        avg = sum / 10;
-        printf("%f\n", avg);
-        if (highest < sum)
-        {
-            highest = sum;
-            strcpy(hIssue, issue2);
-        }
-        if (lowest > sum)
-        {
-            lowest = sum;
-            strcpy(sIssue, issue2);
-        }
-        printf("%s", issue3);
-        for (int i = strlen(issue3); i < longest; i++)
-            printf(" ");
-        sum = 0;
-        for (int i = 0; i < 10; i++)
-        {
-            sum += ratings[2][i];
-            printf("%d\t", ratings[2][i]);
-        }
-        avg = sum / 10;
-        printf("%f\n", avg);
-        if (highest < sum)
-        {
-            highest = sum;
-            strcpy(hIssue, issue3);
-        }
-        if (lowest > sum)
-        {
-            lowest = sum;
-            strcpy(sIssue, issue3);
-        }
-        printf("%s", issue4);
-        for (int i = strlen(issue4); i < longest; i++)
-            printf(" ");
-        sum = 0;
-        for (int i = 0; i < 10; i++)
-        {
-            sum += ratings[3][i];
-            printf("%d\t", ratings[3][i]);
-        }
-        avg = sum / 10;
-        printf("%f\n", avg);
-        if (highest < sum)
-        {
-            highest = sum;
-            strcpy(hIssue, issue4);
-        }
-        if (lowest > sum)
-        {
-            lowest = sum;
-            strcpy(sIssue, issue4);
-        }
-        printf("%s", issue5);
-        for (int i = strlen(issue5); i < longest; i++)
-            printf(" ");
-        sum = 0;
-        for (int i = 0; i < 10; i++)
-        {
-            sum += ratings[4][i];
-            printf("%d\t", ratings[4][i]);
-        }
-        avg = sum / 10;
-        printf("%f\n", avg);
-        if (highest < sum)
-        {
-            highest = sum;
-            strcpy(hIssue, issue5);
-        }
-        if (lowest > sum)
-        {
-            lowest = sum;
-            strcpy(sIssue, issue5);
-        }
-        printf("%s has the highest point of %d\n", hIssue, highest);
-        printf("%s has the lowest point of %d\n", sIssue, lowest);
-        printf("\nDo you want to conduct another survey?(y/n): ");
-        scanf(" %c", &ch);
-    } while (ch == 'Y' || ch == 'y');
+    }
+    //(d) print lowest point clause
+    printf("\nmin point cause : %s", cause[pos_min]);
+    printf("\n");
+    printf("point total : %d", minp);
+    printf("\n");
+
     return 0;
 }
