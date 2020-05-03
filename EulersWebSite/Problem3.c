@@ -2,7 +2,10 @@
 
 int main()
 {
-    long long n = 600851475143L;
+    long long n;
+
+    printf("Enter a number to get the longest prime factor:");
+    scanf("%I64d", &n);
 
     for (long long i = 2; i < n; ++i)
     {
