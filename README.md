@@ -1,4 +1,5 @@
-# C HOW TO PROGRAM
+# C HOW TO PROGRAM 
+# South Texas College
 
 ![](img/cprogram.jpg)
 
